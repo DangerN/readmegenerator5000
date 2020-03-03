@@ -23,10 +23,12 @@ inquirer
   .prompt(questions)
   .then(function(ans) {
     const { username, favcolor } = ans
-    const queryUrl = `https://api.github.com/users/${username}/repos?per_page=100`;
+    const queryUrl = `https://api.github.com/users/${username}/repos?per_page=1`;
     axios.get(queryUrl).then(function(res) {
-      const repoNames = res.data.map(function(repo) {
-        // console.log(res.data)
+      const repoNames = res.data.map(function(repo, index) {
+        console.log(res.data);
+        console.log('res.data', res.data[index].owner)
+        console.log('repo', repo.owner);
         return repo.owner.avatar_url;
 
       });
